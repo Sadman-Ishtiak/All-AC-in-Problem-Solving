@@ -11,27 +11,14 @@
 #define     fileIO          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 using namespace std;
 void solve(){
-    int n;
-    cin >> n;
-    vector<char>ans(3);
-    if(n>52){
-        ans[0] = 'z';
-        n-=26;
-    } else{
-        ans[0] = 'a';
-        n--;
+    string s;
+    cin >> s;
+    for (int i = 1; i < 9; i++){
+        if(s[1] != ('0'+i)) cout << s[0] << i << endl;
     }
-    if(n>26){
-        ans[1] = 'z';
-        n-= 26;
-    } else{
-        ans[1] = 'a';
-        n--;
+    for (char i = 'a'; i < 'i'; i++){
+        if(s[0] != i) cout << i << s[1] << endl;
     }
-    ans[2] = 'a'+n-1;
-    sort(ans)
-    for(char i : ans) cout << i;
-    cout << endl;
 }
 int32_t main() {
     int t = 1;

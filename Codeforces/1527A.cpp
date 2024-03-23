@@ -13,25 +13,12 @@ using namespace std;
 void solve(){
     int n;
     cin >> n;
-    vector<char>ans(3);
-    if(n>52){
-        ans[0] = 'z';
-        n-=26;
-    } else{
-        ans[0] = 'a';
-        n--;
+    int ans = INT64_MAX;
+    vector<bool>a;
+    while (ans >= n){
+        ans = ans >> 1;
     }
-    if(n>26){
-        ans[1] = 'z';
-        n-= 26;
-    } else{
-        ans[1] = 'a';
-        n--;
-    }
-    ans[2] = 'a'+n-1;
-    sort(ans)
-    for(char i : ans) cout << i;
-    cout << endl;
+    cout << ans << endl;
 }
 int32_t main() {
     int t = 1;

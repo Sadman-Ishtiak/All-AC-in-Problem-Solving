@@ -13,24 +13,23 @@ using namespace std;
 void solve(){
     int n;
     cin >> n;
-    vector<char>ans(3);
-    if(n>52){
-        ans[0] = 'z';
-        n-=26;
-    } else{
-        ans[0] = 'a';
-        n--;
+    vector<int>a(n);
+    for (int i = 0; i < n; i++) cin >> a[i];
+    for (int i = 0; i < n; i++){
+        int x;
+        cin >> x;
+        string s;
+        cin >> s;
+        for (int j = 0; j < x; j++){
+            if(s[j] == 'D') a[i]++;
+            if(s[j] == 'U') a[i]--;
+        }
     }
-    if(n>26){
-        ans[1] = 'z';
-        n-= 26;
-    } else{
-        ans[1] = 'a';
-        n--;
+    
+    
+    for (int i = 0; i < n; i++){
+        cout << (a[i]+100)%10 << " " ;
     }
-    ans[2] = 'a'+n-1;
-    sort(ans)
-    for(char i : ans) cout << i;
     cout << endl;
 }
 int32_t main() {
