@@ -86,24 +86,12 @@
 #define     fileIO          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 using namespace std;
 void solve(){
-	int n, sum = 0; cin >> n;
-	vector<int>a(n);
-	for(int i = 0; i < n; i++){
-		cin >> a[i];
-		sum += a[i];
-	}
-	if(sum%n == 0) {
-		bool ans = true;
-		int avg = sum/n, extra = 0;
-		for(int i = 0; i < n; i++){
-			extra += a[i]-avg;
-			if(extra < 0){
-				NO;
-				return;
-			}
-		}
-		YES;
-	}
+	vector<int>a(3);
+	cin >> a[0] >> a[1] >> a[2];
+	sort(a)
+	if(a[2] == a[0]+ a[1]) YES;
+	else if(a[2] == a[1] && a[0] %2 == 0) YES;
+	else if(a[0] == a[1] && a[2] %2 == 0) YES;
 	else NO;
 }
 int32_t main() {
