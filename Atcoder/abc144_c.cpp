@@ -30,18 +30,22 @@ void SieveOfEratosthenes(int n){
 void solve(){
     int n;
     cin >> n;
-    int sq = sqrt(n);
-    bool ans = false;
-    if(sq*sq == n) {
-        if(primes.find(sq) != primes.end()) ans = true;
+    vector<pair<int,int>>potential_answers;
+    for (int i = 1; i*i <= n; i++) {
+        if(n%i == 0) potential_answers.push_back(make_pair(i, n/i));
     }
-    if(ans) YES;
-    else NO;
+    int flag = INT64_MAX;
+    for (auto &&i : potential_answers) {
+        if (flag > i.first + i.second - 2) {
+            flag = i.first + i.second - 2;
+        }
+    }
+    cout << flag;
 }
 int32_t main() {
     int t = 1;
-    SieveOfEratosthenes(1000000);
-    cin >> t;
+    SieveOfEratosthenes(1000000+10);
+    // cin >> t;
     while(t--) solve();
     return 0;
 }

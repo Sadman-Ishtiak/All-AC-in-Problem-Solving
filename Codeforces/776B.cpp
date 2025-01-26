@@ -30,18 +30,33 @@ void SieveOfEratosthenes(int n){
 void solve(){
     int n;
     cin >> n;
-    int sq = sqrt(n);
-    bool ans = false;
-    if(sq*sq == n) {
-        if(primes.find(sq) != primes.end()) ans = true;
+    vector<int>answer(n+100, 1);
+
+    if(n <= 2) {
+        cout << 1 << endl;
+        for (int i = 0; i < n; i++) {
+            cout << 1 << " ";
+        }
+        return;
     }
-    if(ans) YES;
-    else NO;
+
+    for (auto &&i : primes) {
+        if(i < n+100){
+            answer[i] = 2;
+        }
+    }
+    
+    int fl = *max_element(answer.begin(), answer.end());
+    cout << fl << endl;
+    for (int i = 2; i <= n+1; i++) {
+        cout << answer[i] << " ";
+    }
 }
+
 int32_t main() {
     int t = 1;
+    // cin >> t;
     SieveOfEratosthenes(1000000);
-    cin >> t;
     while(t--) solve();
     return 0;
 }

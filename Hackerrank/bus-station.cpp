@@ -14,19 +14,37 @@ using namespace std;
 void solve(){
     int n;
     cin >> n;
-    vector<int>answer;
-    if(n % 2 == 1) {
-        answer.push_back(3);
-        n -= 3;
+    vector<int>a(n);
+    int m = INT_MIN, sum = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        sum += a[i];
+        m = max(m, a[i]);
     }
-    while (n > 0) {
-        answer.push_back(2);
-        n -= 2;
+    set<int>factors_of_sum;
+    int sq = sqrt(sum);
+    for (int i = 1; i <= sq; i++) {
+        if(sum%i == 0) {
+            factors_of_sum.insert(i);
+            factors_of_sum.insert(sum/i);
+        }
     }
-    cout << answer.size() << endl;
-    for (auto &&i : answer) {
-        cout << i << " ";
+    
+    for (int i : factors_of_sum) {
+        // cout << i << " ";
+        bool ans = true;
+        int curr = 0;
+        for (int j = 0; j < n; j++) {
+            curr+= a[j];
+            if(curr == i) curr = 0;
+            if(curr > i) {
+                ans = false;
+                break;
+            }
+        }
+        if(ans && curr == 0) cout << i << " ";
     }
+    
 }
 int32_t main() {
     int t = 1;

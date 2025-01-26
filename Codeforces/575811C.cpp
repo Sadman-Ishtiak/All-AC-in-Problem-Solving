@@ -11,37 +11,28 @@
 #define     fileIO          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 using namespace std;
 
-set<int>primes = {2};
- 
-void SieveOfEratosthenes(int n){
-    bool prime[n + 1];
-    memset(prime, true, sizeof(prime));
-    for (int p = 2; p * p <= n; p++) {
-        if (prime[p] == true) {
-            for (int i = p * p; i <= n; i += p)
-                prime[i] = false;
-        }
-    }
-    for (int p = 2; p <= n; p++)
-        if (prime[p])
-            primes.insert(p);
-}
-
 void solve(){
     int n;
     cin >> n;
-    int sq = sqrt(n);
-    bool ans = false;
-    if(sq*sq == n) {
-        if(primes.find(sq) != primes.end()) ans = true;
+    map<string, string>ans;
+    for (int i = 0; i < n; i++) {
+        string s1, s2;
+        cin >> s1 >> s2;
+        if(ans.find(s1) == ans.end()) ans[s2] = s1;
+        else {
+            string t = ans[s1];
+            ans.erase(s1);
+            ans[s2] = t;
+        }
     }
-    if(ans) YES;
-    else NO;
+    cout << ans.size() << endl;
+    for (auto &&i : ans) {
+        cout << i.second << " " << i.first << endl;
+    }
 }
 int32_t main() {
     int t = 1;
-    SieveOfEratosthenes(1000000);
-    cin >> t;
+    // cin >> t;
     while(t--) solve();
     return 0;
 }

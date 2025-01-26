@@ -11,37 +11,43 @@
 #define     fileIO          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 using namespace std;
 
-set<int>primes = {2};
- 
-void SieveOfEratosthenes(int n){
-    bool prime[n + 1];
-    memset(prime, true, sizeof(prime));
+set<int> primes = {2};
+void SieveOfEratosthenes(int n) {
+    if (n < 2) return;
+    vector<bool> is_prime(n + 1, true);
+    is_prime[0] = is_prime[1] = false; // 0 and 1 are not prime numbers
     for (int p = 2; p * p <= n; p++) {
-        if (prime[p] == true) {
+        if (is_prime[p]) {
+            // Mark multiples of p as not prime, starting from p * p
             for (int i = p * p; i <= n; i += p)
-                prime[i] = false;
+                is_prime[i] = false;
         }
     }
-    for (int p = 2; p <= n; p++)
-        if (prime[p])
-            primes.insert(p);
+    // Collect all prime numbers
+    primes.clear();
+    for (int p = 2; p <= n; p++) {
+        if (is_prime[p]) primes.insert(p);
+    }
 }
 
 void solve(){
     int n;
     cin >> n;
-    int sq = sqrt(n);
-    bool ans = false;
-    if(sq*sq == n) {
-        if(primes.find(sq) != primes.end()) ans = true;
+    int ans = 0;
+    __int128_t maxprimefactor = 1;
+    for (auto &&i : primes) {
+        maxprimefactor *= i;
+        if(maxprimefactor > n) {
+            break;
+        }
+        ans++;
     }
-    if(ans) YES;
-    else NO;
+    cout << ans << endl;
 }
 int32_t main() {
     int t = 1;
-    SieveOfEratosthenes(1000000);
     cin >> t;
+    SieveOfEratosthenes(1000);
     while(t--) solve();
     return 0;
 }

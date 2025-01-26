@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
 #define     int             long long
 #define     endl            '\n'
-#define     YES             cout << "YES" << '\n'
-#define     NO              cout << "NO" << '\n'
+#define     YES             cout << "Yes" << '\n'
+#define     NO              cout << "No" << '\n'
 #define     ld              long double
 #define     all(x)          x.begin(),x.end()
 #define     sort(x)         sort(all(x));
@@ -12,21 +12,23 @@
 using namespace std;
 
 void solve(){
-    int n;
-    cin >> n;
-    vector<int>answer;
-    if(n % 2 == 1) {
-        answer.push_back(3);
-        n -= 3;
+    string s;
+    cin >> s;
+    int n = s.length();
+    int open = 0;
+    for (int i = 0; i < n; i++) {
+        if (s[i] == '(')
+            open++;
+        else if (open > 0) {
+            open--;
+        }
+        else{
+            NO;
+            return;
+        }
     }
-    while (n > 0) {
-        answer.push_back(2);
-        n -= 2;
-    }
-    cout << answer.size() << endl;
-    for (auto &&i : answer) {
-        cout << i << " ";
-    }
+    if(open == 0) YES;
+    else NO;
 }
 int32_t main() {
     int t = 1;

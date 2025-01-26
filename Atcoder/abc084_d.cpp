@@ -27,21 +27,24 @@ void SieveOfEratosthenes(int n){
             primes.insert(p);
 }
 
+vector<int>DP(1000000, 0);
+
 void solve(){
-    int n;
-    cin >> n;
-    int sq = sqrt(n);
-    bool ans = false;
-    if(sq*sq == n) {
-        if(primes.find(sq) != primes.end()) ans = true;
-    }
-    if(ans) YES;
-    else NO;
+    int l, r;
+    cin >> l >> r;
+    cout << DP[r] - DP[l-1] << endl;
 }
 int32_t main() {
     int t = 1;
-    SieveOfEratosthenes(1000000);
     cin >> t;
+    SieveOfEratosthenes(1000000);
+    for (auto &&i : primes) {
+        // cout << i << " ";
+        if(primes.find((i+1)/2) != primes.end()) DP[i] = 1;
+    }
+    for (int i = 1; i < 1000000; i++) {
+        DP[i] += DP[i-1];
+    }
     while(t--) solve();
     return 0;
 }

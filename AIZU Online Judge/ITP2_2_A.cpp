@@ -11,37 +11,31 @@
 #define     fileIO          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 using namespace std;
 
-set<int>primes = {2};
- 
-void SieveOfEratosthenes(int n){
-    bool prime[n + 1];
-    memset(prime, true, sizeof(prime));
-    for (int p = 2; p * p <= n; p++) {
-        if (prime[p] == true) {
-            for (int i = p * p; i <= n; i += p)
-                prime[i] = false;
+void solve(){
+    int n, queries;
+    cin >> n >> queries;
+    stack<int>stack[n];
+    for (int i = 0; i < queries; i++) {
+        int query, choice, value;
+        cin >> query;
+        if (query == 0) {
+            cin >> choice >> value;
+            stack[choice].push(value);
+        }
+        else if(query == 1) {
+            cin >> choice;
+            if(!stack[choice].empty()) cout << stack[choice].top() << endl;
+        }
+        else {
+            cin >> choice;
+            if(!stack[choice].empty()) stack[choice].pop();
         }
     }
-    for (int p = 2; p <= n; p++)
-        if (prime[p])
-            primes.insert(p);
-}
-
-void solve(){
-    int n;
-    cin >> n;
-    int sq = sqrt(n);
-    bool ans = false;
-    if(sq*sq == n) {
-        if(primes.find(sq) != primes.end()) ans = true;
-    }
-    if(ans) YES;
-    else NO;
+    
 }
 int32_t main() {
     int t = 1;
-    SieveOfEratosthenes(1000000);
-    cin >> t;
+    // cin >> t;
     while(t--) solve();
     return 0;
 }

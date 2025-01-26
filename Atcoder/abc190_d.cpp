@@ -27,21 +27,28 @@ void SieveOfEratosthenes(int n){
             primes.insert(p);
 }
 
+
 void solve(){
     int n;
     cin >> n;
-    int sq = sqrt(n);
-    bool ans = false;
-    if(sq*sq == n) {
-        if(primes.find(sq) != primes.end()) ans = true;
+    n*= 2;
+    int ans = 0;
+    for (int i = 1; i*i <= n; i++) {
+        if(n%i == 0) {
+            int x = i, y = n/i;
+            int a = (x-y+1)/2, b = (x+y-1)/2;
+            if( (a+b) * (b-a+1) == n) {
+                if(a == b) ans++;
+                else ans += 2;
+            }
+        }
     }
-    if(ans) YES;
-    else NO;
+    cout << ans;
 }
 int32_t main() {
     int t = 1;
-    SieveOfEratosthenes(1000000);
-    cin >> t;
+    // cin >> t;
+    // SieveOfEratosthenes(1000000+100);
     while(t--) solve();
     return 0;
 }
