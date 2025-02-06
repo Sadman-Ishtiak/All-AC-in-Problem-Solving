@@ -11,16 +11,21 @@
 #define     fileIO          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 using namespace std;
 
-
 void solve(){
     int n;
     cin >> n;
-    int ans = 1;
-    while (n > 3) {
-        ans *= 2;
-        n /= 4;
+    vector<pair<int,int>>a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i].first >> a[i].second;
     }
-    cout << ans << endl;
+    bool ans = true;
+    for (int i = 1; i < n; i++) {
+        if(a[i].first >= a[0].first) {
+            if(a[i].second >= a[0].second) ans = false;
+        }
+    }
+    if(ans) cout << a[0].first << endl;
+    else cout << -1 << endl;
 }
 int32_t main() {
     int t = 1;

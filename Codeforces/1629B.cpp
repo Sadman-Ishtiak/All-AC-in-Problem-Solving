@@ -11,16 +11,20 @@
 #define     fileIO          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 using namespace std;
 
-
 void solve(){
-    int n;
-    cin >> n;
-    int ans = 1;
-    while (n > 3) {
-        ans *= 2;
-        n /= 4;
+    int l, r, k;
+    cin >> l >> r >> k;
+    int nums = (r - l + 1);
+    if(nums == 1) {
+        if(l == 1) NO;
+        else YES;
     }
-    cout << ans << endl;
+    else {
+        int odds = nums/2;
+        if(l%2 == 1 && r%2 == 1) odds++;
+        if(odds <= k) YES;
+        else NO;
+    }
 }
 int32_t main() {
     int t = 1;
